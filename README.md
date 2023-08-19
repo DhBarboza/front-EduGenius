@@ -1,0 +1,2 @@
+# front-EduGenius
+Frontend EduGenius
