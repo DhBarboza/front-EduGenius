@@ -2,6 +2,7 @@
   <div class="container text-center">
     <div class="row">
       <div class="col">
+        <h1> Matéria </h1>
         <select class="form-select form-select-lg mb-3" v-model="selectedMateria">
           <option v-for="(subject, index) in subjects" :key="subject.id" :value="index">{{ subject.name }}</option>
         </select>
@@ -9,6 +10,7 @@
 
       <div class="col">
         <select v-if="selectedMateria !== undefined" class="form-select form-select-lg mb-3" v-model="selectedTopic">
+          <h1> Tópico </h1>
           <option v-for="(subject, index) in subjects[selectedMateria].children" :key="index" :value="subject">{{ subject.name }}</option>
         </select>
       </div>
