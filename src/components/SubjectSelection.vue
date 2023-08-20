@@ -1,9 +1,5 @@
 <template>
     <div class="select">
-      <svg class="select-svg">
-        <path d="M0 0 L5 5 L10 0"></path>
-      </svg>
-
       <select class="select-element" v-model="selectedMateria">
         <option v-for="(subject, index) in subjects" :key="subject.id" :value="index">{{ subject.name }}</option>
       </select>
