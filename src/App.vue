@@ -1,28 +1,17 @@
 <script setup>
-import { ref, computed } from 'vue'
-import ShowSubjects from './components/ShowSubjects.vue'
-import MateriaTopico from './components/MateriaTopico.vue'
-
-
-const routes = {
-  '/': ShowSubjects,
-  '/about': MateriaTopico
-}
-
-const currentPath = ref(window.location.hash)
-
-window.addEventListener('hashchange', () => {
-  currentPath.value = window.location.hash
-})
-
-const currentView = computed(() => {
-  return routes[currentPath.value.slice(1) || '/'] 
-})
 </script>
 
 <template>
-  <a href="#/">Home</a> |
-  <a href="#/about">About</a> |
-  <a href="#/non-existent-path">Broken Link</a>
-  <component :is="currentView" />
+  <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/content">Content</router-link>
+  </div>
+  <router-view />
 </template>
+
+<style>
+  .navbar {
+    background-color: lightgreen;
+    padding: 1.2rem;
+  }
+</style>
