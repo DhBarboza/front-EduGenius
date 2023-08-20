@@ -1,15 +1,26 @@
 <template>
-  <div class="select">
-    <select class="select-element" v-model="selectedMateria">
-      <option v-for="(subject, index) in subjects" :key="subject.id" :value="index">{{ subject.name }}</option>
-    </select>
+    <div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <h1> Matéria </h1>
+        <select class="form-select form-select-lg mb-3" v-model="selectedMateria">
+          <option v-for="(subject, index) in subjects" :key="subject.id" :value="index">{{ subject.name }}</option>
+        </select>
+      </div>
 
-    <select v-if="selectedMateria !== undefined" class="select-element" v-model="selectedTopic">
-      <option v-for="(subject, index) in subjects[selectedMateria].children" :key="index" :value="subject">{{ subject.name }}</option>
-    </select>
+      <div class="col">
+        <div v-if="selectedMateria !== undefined">
+        <h1> Tópico </h1>
+        <select  class="form-select form-select-lg mb-3" v-model="selectedTopic">
+          <option v-for="(subject, index) in subjects[selectedMateria].children" :key="index" :value="subject">{{ subject.name }}</option>
+        </select>
+      </div>
+      </div>
+    </div>
+
+    <button v-if="selectedMateria !== undefined" @click="handleContentClick">Ver conteúdo</button>
   </div>
   
-  <button v-if="selectedMateria !== undefined" @click="handleContentClick">Ver conteúdo</button>
 
   <div v-if="showContent" class="content-boxes">
     <div :key="contents.originalContent.id" class="content-box">
