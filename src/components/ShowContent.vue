@@ -1,9 +1,5 @@
 <template>
   <div class="content-page">
-    <div class="header">
-      <h1>{{ subjectName.name }}</h1>
-      <h2>{{ topicName.name }}</h2>
-    </div>
     <div class="content-boxes">
       <div v-for="content in contents" :key="content.id" class="content-box">
         <h3>{{ content.title }}</h3>
@@ -11,6 +7,7 @@
       </div>
     </div>
   </div>
+  {{  }}
 </template>
 
 <script>

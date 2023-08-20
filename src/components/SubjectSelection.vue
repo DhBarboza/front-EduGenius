@@ -1,48 +1,85 @@
 <template>
-  <div class="body">
     <div class="select">
       <svg class="select-svg">
         <path d="M0 0 L5 5 L10 0"></path>
       </svg>
+
       <select class="select-element" v-model="selectedMateria">
         <option v-for="(subject, index) in subjects" :key="subject.id" :value="index">{{ subject.name }}</option>
       </select>
+
       <select v-if="selectedMateria !== undefined" class="select-element" v-model="selectedTopic">
         <option v-for="(subject, index) in subjects[selectedMateria].children" :key="index" :value="subject">{{ subject.name }}</option>
       </select>
-
-      <router-link to="/content" @click="handleContentClick">Content</router-link>
     </div>
+    
+    <button v-if="selectedMateria !== undefined" @click="handleContentClick">Ver conteúdo</button>
+ 
+    <div v-if="showContent" class="content-boxes">
+      <div :key="contents.originalContent.id" class="content-box">
+        <h3>Padrão</h3>
+        <p>{{ contents.originalContent.content }}</p>
+      </div>
 
-    <div class="sprites"></div>
-  </div>
+      <div v-for="content in contents.contentsResults" :key="content.id" class="content-box">
+        <h3>{{ content.level }}</h3>
+        <p>{{ content.content }}</p>
+      </div>
+    </div>
+  
 </template>
 
 <script>
   import axios from 'axios';
-  import {useSubjectSelection} from '/src/stores/subjectSelectionStore.js';
 
 export default {
   data() {
     return {
       subjects: null,
+      showContent: false,
       selectedMateria: undefined,
       selectedTopic: '',
       texto: '',
+      contents: [
+        {
+          id: 1,
+          title: 'Conteúdo 1',
+          description: 'Descrição do conteúdo 1.',
+        },
+        {
+          id: 2,
+          title: 'Conteúdo 2',
+          description: 'Descrição do conteúdo 2.',
+        },
+        {
+          id: 3,
+          title: 'Conteúdo 3',
+          description: 'Descrição do conteúdo 3.',
+        },
+      ],
     };
   },
   methods: {
-    updateSelectedTopic() {
-      const selectedSubject = useSubjectSelection();
-
-      selectedSubject.setSubject(this.subjects[this.selectedMateria], this.selectedTopic);
-    },
     setSubjects(subjects) {
       this.subjects = subjects;
     },
 
+    setContents(contents) {
+      this.contents = contents;
+    },
+
     handleContentClick() {
-      this.updateSelectedTopic(this.selectedMateria, this.selectedTopic);
+      axios
+        .get(`http://localhost:3000/get_contents_by_subject/${this.selectedTopic.id}`)
+        .then(response => {
+          console.log(response.data)
+          this.setContents(response.data)
+          this.showContent = true;
+
+        })
+        .catch(e => {
+          console.log(e)
+        })
     },
   },
   mounted () {
@@ -60,7 +97,6 @@ export default {
 
 <style>
 .body {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,5 +164,19 @@ export default {
   height: 0;
   pointer-events: none;
   user-select: none;
+}
+
+.content-boxes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content-box {
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 10px;
+  background-color: #f5f5f5;
 }
 </style>
