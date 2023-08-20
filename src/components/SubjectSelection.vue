@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+import eduGeniusApi from '@/assets/js/eduGeniusApi';
 
 export default {
   data() {
@@ -65,29 +65,21 @@ export default {
     },
 
     handleContentClick() {
-      axios
-        .get(`http://localhost:3000/get_contents_by_subject/${this.selectedTopic.id}`)
-        .then(response => {
-          console.log(response.data)
-          this.setContents(response.data)
-          this.showContent = true;
-
-        })
-        .catch(e => {
-          console.log(e)
-        })
+      eduGeniusApi.getContentsBySubjectId(this.selectedTopic.id).then(response => {
+        this.setContents(response.data)
+        this.showContent = true;
+      }).catch(e => {
+        console.error(e)
+      })
     },
   },
   mounted () {
-      axios
-        .get('http://localhost:3000/list_subjects')
-        .then(response => {
-          this.setSubjects(response.data)
-        })
-        .catch(e => {
-          console.log(e)
-        })
-    }
+    eduGeniusApi.getSubjects().then(response => {
+      this.setSubjects(response.data)
+    }).catch(e => {
+      console.error(e)
+    })
+  }
 };
 </script>
 
