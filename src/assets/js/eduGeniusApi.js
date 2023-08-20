@@ -6,11 +6,11 @@ class EduGeniusApi {
   constructor() {}
 
   async getContentsBySubjectId(subjectId) {
-    return axios.get(`${host}/list_contents/${subjectId}`)
+    return axios.get(`${host}/get_contents_by_subject/${subjectId}`)
   }
 
   async getSubjects() {
-    axios.get(`${host}/list_subjects`)
+    return axios.get(`${host}/list_subjects`)
   }
 
   async registerTeacher(name, email) {

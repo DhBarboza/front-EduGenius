@@ -9,10 +9,12 @@
       </div>
 
       <div class="col">
-        <select v-if="selectedMateria !== undefined" class="form-select form-select-lg mb-3" v-model="selectedTopic">
-          <h1> Tópico </h1>
+        <div v-if="selectedMateria !== undefined">
+        <h1> Tópico </h1>
+        <select  class="form-select form-select-lg mb-3" v-model="selectedTopic">
           <option v-for="(subject, index) in subjects[selectedMateria].children" :key="index" :value="subject">{{ subject.name }}</option>
         </select>
+      </div>
       </div>
     </div>
   </div>
