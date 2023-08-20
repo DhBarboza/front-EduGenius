@@ -3,11 +3,12 @@
 
 <template>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <div id="nav">
+  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+    <img src="./assets/LogotipoEduGenius.png">
     <router-link to="/">Home</router-link>
     <router-link to="/registerContent">Registar Conteudo</router-link>
     <router-link to="/login">Login</router-link>
-  </div>
+  </nav>
   <router-view />
 </template>
 
@@ -24,18 +25,12 @@ export default {
 </script>
 
 <style>
-  #nav {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    height: 1%;
-    background-color: rgb(7, 160, 130);
-    padding: 2rem;
+  .img {
+    width: 400px;
   }
 
-  footer {
-    background-color: lightgreen;
-    padding: 1.2rem;
+  .nav {
+    height: 50%;
   }
 
   router-link {
