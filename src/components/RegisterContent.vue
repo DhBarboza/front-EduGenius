@@ -35,14 +35,11 @@
   <div class="row" v-if="contentGenerated">
     <div class="col" v-for="(content, index) in this.generatedContent" :key="content.id" :value="content">
         <div class="card">
-          <div class="card-header bg-success" :class="{
+          <div class="card-header bg-success text-white" :class="{
             'bg-danger': content.status === 'rejected',
             'bg-warning': content.status === 'pending',
           }">
-            <!-- <p v-if="content.status === 'approved'" class="text-success">{{content.level}}</p>
-            <p v-if="content.status === 'rejected'" class="text-danger">{{content.level}}</p>
-            <p v-if="content.status === 'pending'" class="card-text">{{content.content}}</p> -->
-            {{content.level}}
+            {{contentTranslation[content.level]}}
           </div>
           <div class="card-body">
             <p class="card-text">{{content.content}}</p>
@@ -67,6 +64,10 @@ data() {
     contentGenerated: false,
     isLoading: false,
     content: '',
+    contentTranslation: {
+      'simplified': 'Simplificado',
+      'expanded': 'Outro ponto de vista'
+    },
     generatedContent: '',
   };
 },

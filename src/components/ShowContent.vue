@@ -22,14 +22,18 @@
   </div>
   
 
-  <div v-if="showContent" class="content-boxes">
+  <div v-if="showContent && contents.originalContent === undefined" class="container text-center">
+    Ainda não possuimos conteudo para essa materia!
+  </div>
+
+  <div v-if="showContent && contents.originalContent !== undefined" class="content-boxes">
     <div :key="contents.originalContent.id" class="content-box">
       <h3>Padrão</h3>
       <p>{{ contents.originalContent.content }}</p>
     </div>
 
     <div v-for="content in contents.contentsResults" :key="content.id" class="content-box">
-      <h3>{{ content.level }}</h3>
+      <h3>{{ contentTranslation[content.level] }}</h3>
       <p>{{ content.content }}</p>
     </div>
   </div>
@@ -47,23 +51,11 @@ data() {
     selectedMateria: undefined,
     selectedTopic: '',
     texto: '',
-    contents: [
-      {
-        id: 1,
-        title: 'Conteúdo 1',
-        description: 'Descrição do conteúdo 1.',
+    contentTranslation: {
+        'simplified': 'Simplificado',
+        'expanded': 'Outro ponto de vista'
       },
-      {
-        id: 2,
-        title: 'Conteúdo 2',
-        description: 'Descrição do conteúdo 2.',
-      },
-      {
-        id: 3,
-        title: 'Conteúdo 3',
-        description: 'Descrição do conteúdo 3.',
-      },
-    ],
+    contents: undefined,
   };
 },
 methods: {
