@@ -1,15 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
-import SubjectSelection from "/src/components/SubjectSelection.vue";
 import RegisterContent from "/src/components/RegisterContent.vue";
 import TeacherLogin from "/src/components/Login.vue";
-import RegisterSubject from "/src/components/RegisterSubject.vue";
 import ShowContent from "/src/components/ShowContent.vue";
 
 const routes = [
   {
     path: "/",
-    name: "SubjectSelection",
-    component: SubjectSelection,
+    name: "Home",
+    component: ShowContent,
   },
   {
     path: "/registerContent",
@@ -18,19 +16,9 @@ const routes = [
   },
   {
     path: "/login",
-    name: "ShowContent",
+    name: "TeacherLogin",
     component: TeacherLogin,
   },
-  {
-    path: "/content",
-    name: "ShowContent",
-    component: ShowContent,
-  },
-  {
-    pat: "/registerSubject",
-    name: "RegisterSubject",
-    component: RegisterSubject,
-  }
 ];
 
 const router = createRouter({
