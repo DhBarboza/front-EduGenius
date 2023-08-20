@@ -1,4 +1,5 @@
 # front-edugenius
+Projeto de FrontEnd servido pela API [edu-genius](https://github.com/dev-cruz/edu-genius)
 
 ## Project setup
 ```
@@ -10,15 +11,5 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Tech Decisions
+Escolhemos **VueJS** como framework para o front-end pois é simples e facil de implementar.
