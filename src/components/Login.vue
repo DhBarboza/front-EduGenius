@@ -3,7 +3,7 @@
     <h2>Login</h2>
     <div class="input-container">
         <label for="nome">Nome:</label>
-        <input
+        <input v-model="name"
             type="text"
             id="nome"
             name="nome"
@@ -12,32 +12,39 @@
     </div>
     <div class="input-container">
         <label for="email">Email:</label>
-        <input
+        <input v-model="email"
             type="text"
             id="email"
             name="email"
             placeholder="Digite seu email"
         />
     </div>
-    <button id="entrarBtn">Entrar</button>
+    <button id="entrarBtn" @click="handleLogin" >Entrar</button>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'TeacherLogin',
-    data() {
-      return {
-        name: '',
-        email: '',
-      };
+import eduGeniusApi from '@/assets/js/eduGeniusApi';
+
+export default {
+  name: 'TeacherLogin',
+  data() {
+    return {
+      name: '',
+      email: '',
+    };
+  },
+  methods: {
+    handleLogin() {
+      eduGeniusApi.registerTeacher(this.name, this.email).then((response) => {
+        console.log(response);
+        this.$router.push('/');
+      }).catch((error) => {
+        console.log(error);
+      });
     },
-    methods: {
-      handleLogin() {
-        console.log('Login');
-      },
-    },
-  }
+  },
+}
 </script>
 
 <style>
