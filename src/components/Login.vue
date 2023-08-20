@@ -34,14 +34,23 @@ export default {
       email: '',
     };
   },
+  computed: {
+    isFormValid() {
+      return this.name !== '' && this.email !== '';
+    },
+  },
   methods: {
     handleLogin() {
-      eduGeniusApi.registerTeacher(this.name, this.email).then((response) => {
+      if (this.isFormValid) {
+        eduGeniusApi.registerTeacher(this.name, this.email).then((response) => {
         console.log(response);
         this.$router.push('/');
-      }).catch((error) => {
-        console.log(error);
-      });
+        }).catch((error) => {
+          console.log(error);
+        });
+      } else {
+        alert('Preencha todos os campos!');
+      }
     },
   },
 }
